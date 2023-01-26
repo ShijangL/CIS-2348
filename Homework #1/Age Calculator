@@ -18,4 +18,3 @@ if current_month >= birth_month and current_day >= birth_day:
 else:
     age = current_year - birth_year - 1
     print(f'You are {age} years old.')
-
