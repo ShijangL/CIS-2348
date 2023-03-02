@@ -15,6 +15,7 @@ month = {
         }
 with open('inputDates.txt', 'r') as datefile:
     date = datefile.readline()
+    output = open('parsedDates.txt', 'w')
     while date:
         for i in month:
             if date.find(i) != -1:
@@ -22,9 +23,10 @@ with open('inputDates.txt', 'r') as datefile:
             else:
                 continue
             if found:
-                newlist = date.replace(',', '').split()
+                newlist = date.split()
                 newlist[0] = month[newlist[0]]
-                num_date = datetime.date(int(newlist[2]), int(newlist[0]), int(newlist[1]))
-                if num_date < current_date:
-                    print(f'{newlist[0]}/{newlist[1]}/{newlist[2]}')
-        date = datefile.readline()
+                num_date = datetime.date(int(newlist[2]), int(newlist[0]), int(newlist[1].replace(',', '')))
+                if num_date < current_date and ',' in newlist[1]:
+                    output.write(f"{newlist[0]}/{newlist[1].replace(',', '')}/{newlist[2]}\n")
+            date = datefile.readline()
+            output.close()
