@@ -11,3 +11,11 @@ def is_palindrome(word):
     if reverse == new_word:
         result = True
     return result
+
+
+sentence = input()
+answer = is_palindrome(sentence)
+if answer:
+    print(f'{sentence} is a palindrome')
+else:
+    print(f'{sentence} is not a palindrome')
