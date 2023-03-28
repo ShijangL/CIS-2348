@@ -21,3 +21,22 @@ class ItemToPurchase:
         cost = self.item_quantity * self.item_price
         return cost_string, cost
 
+    def print_item_description(self):
+        string = f'{self.item_name}: {self.item_description}.'
+        print(string, end=' ')
+        return string
+
+
+class ShoppingCart:
+    def __init__(self, name="none", date="January 1, 2016"):
+        self.customer_name = name
+        self.current_date = date
+        self.cart_items = []
+
+    def add_item(self):
+        print('\nADD ITEM TO CART', end='\n')
+        item_name = str(input('Enter the item name:'))
+        item_description = str(input('\nEnter the item description:'))
+        item_price = float(input('\nEnter the item price:'))
+        item_quantity = int(input('\nEnter the item quantity:\n'))
+        self.cart_items.append(ItemToPurchase(item_name, item_price, item_quantity, item_description))
