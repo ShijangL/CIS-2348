@@ -40,3 +40,27 @@ class ShoppingCart:
         item_price = float(input('\nEnter the item price:'))
         item_quantity = int(input('\nEnter the item quantity:\n'))
         self.cart_items.append(ItemToPurchase(item_name, item_price, item_quantity, item_description))
+
+    def remove_item(self):
+        flag = False
+        print('REMOVE ITEM FROM CART', end='\n')
+        item_name = str(input('Enter name of item to remove:\n'))
+        for i in self.cart_items:
+            if i.item_name == item_name:
+                flag = True
+                self.cart_items.remove(i)
+        if not flag:
+            print('Item not found in cart. Nothing removed.')
+
+    def modify_item(self):
+        flag = False
+        print('CHANGE ITEM QUANTITY', end='\n')
+        item_name = str(input('Enter the item name:\n'))
+        new_quantity = int(input('Enter the new quantity:\n'))
+        for i in self.cart_items:
+            if i.item_name == item_name:
+                i.item_quantity = new_quantity
+                flag = True
+        if not flag:
+            print('Item not found in cart. Nothing modified.')
+
