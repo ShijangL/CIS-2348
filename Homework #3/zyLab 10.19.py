@@ -98,3 +98,45 @@ class ShoppingCart:
                 print(f'{i.item_name}: {i.item_description}', end='\n')
 
 
+def print_menu(cart):
+    customer_cart = cart
+    letter = "arcioq"
+    command = " "
+    menu = ('\nMENU\n'
+            'a - Add item to cart\n'
+            'r - Remove item from cart\n'
+            'c - Change item quantity\n'
+            'i - Output items\' descriptions\n'
+            'o - Output shopping cart\n'
+            'q - Quit\n')
+
+    while command != 'q':
+        print(menu, end='\n')
+
+        command = input('Choose an option:')
+        print()
+        while command not in letter:
+            command = input('Choose an option:\n')
+        if command == 'a':
+            customer_cart.add_item()
+        if command == 'r':
+            customer_cart.remove_item()
+        if command == 'c':
+            customer_cart.modify_item()
+        if command == 'i':
+            customer_cart.print_descriptions()
+        if command == 'o':
+            customer_cart.print_total()
+
+
+if __name__ == '__main__':
+    print("Enter customer's name:")
+    cname = input()
+    print("Enter today's date:")
+    cdate = input()
+    print()
+    print(f'Customer name: {cname}', end='\n')
+    print(f"Today's date: {cdate}", end='\n')
+
+    newcart = ShoppingCart(cname, cdate)
+    print_menu(newcart)
