@@ -76,3 +76,25 @@ class ShoppingCart:
             cost += (i.item_price * i.item_quantity)
         return cost
 
+    def print_total(self):
+        print('OUTPUT SHOPPING CART', end='\n')
+        print(f"{self.customer_name}'s Shopping Cart - {self.current_date}", end="\n")
+        print(f"Number of Items: {self.get_num_items_in_cart()}", end='\n\n')
+        if len(self.cart_items) == 0:
+            print(f"SHOPPING CART IS EMPTY")
+        else:
+            for i in self.cart_items:
+                print(f'{i.item_name} {i.item_quantity} @ ${i.item_price:.0f} = ${i.item_quantity * i.item_price:.0f}')
+        print(f'\nTotal: ${self.get_cost_of_cart():.0f}', end='\n')
+
+    def print_descriptions(self):
+        print("OUTPUT ITEMS' DESCRIPTIONS")
+        print(f"{self.customer_name}'s Shopping Cart - {self.current_date}", end='\n')
+        if len(self.cart_items) == 0:
+            print(f"SHOPPING CART IS EMPTY")
+        else:
+            print('\nItem Descriptions', end='\n')
+            for i in self.cart_items:
+                print(f'{i.item_name}: {i.item_description}', end='\n')
+
+
