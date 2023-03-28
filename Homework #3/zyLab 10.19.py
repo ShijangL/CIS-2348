@@ -64,3 +64,15 @@ class ShoppingCart:
         if not flag:
             print('Item not found in cart. Nothing modified.')
 
+    def get_num_items_in_cart(self):
+        num = 0
+        for i in self.cart_items:
+            num += i.item_quantity
+        return num
+
+    def get_cost_of_cart(self):
+        cost = 0
+        for i in self.cart_items:
+            cost += (i.item_price * i.item_quantity)
+        return cost
+
