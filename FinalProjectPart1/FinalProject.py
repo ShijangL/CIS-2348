@@ -18,6 +18,10 @@ def sortdates(dateslist):
     return split[2], split[0]
 
 
+def sortprice(pricelist):
+    return pricelist[-2]
+
+
 Mlist = []
 Plist = []
 Slist = []
@@ -145,3 +149,25 @@ with open('PastServiceDateInventory.csv', 'w', newline='') as ServiceDate:
                             dates_writer.writerow([ident, man, ty, co, time, t[-1]])
                         else:
                             dates_writer.writerow([ident, man, ty, co, time])
+
+# Loop to write DamagedInventory
+
+with open('DamagedInventory.csv', 'w', newline='') as DamInventory:
+    Dam_writer = csv.writer(DamInventory)
+
+    newlist = []
+    for q in Mlist:
+        if q[-1] == 'damaged':
+            i = q[0]
+            m = q[1]
+            t = q[2]
+            for s in Plist:
+                if s[0] == i:
+                    p = s[-1]
+            for dt in Slist:
+                if dt[0] == i:
+                    da = dt[-1]
+            newlist.append([i, m, t, p, da])
+            newlist.sort(key=sortprice)
+
+            Dam_writer.writerows(newlist)
