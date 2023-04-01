@@ -33,13 +33,8 @@ class ShoppingCart:
         self.current_date = date
         self.cart_items = []
 
-    def add_item(self):
-        print('\nADD ITEM TO CART', end='\n')
-        item_name = str(input('Enter the item name:'))
-        item_description = str(input('\nEnter the item description:'))
-        item_price = float(input('\nEnter the item price:'))
-        item_quantity = int(input('\nEnter the item quantity:\n'))
-        self.cart_items.append(ItemToPurchase(item_name, item_price, item_quantity, item_description))
+    def add_item(self, item):
+        self.cart_items.append(item)
 
     def remove_item(self):
         flag = False
@@ -118,7 +113,13 @@ def print_menu(cart):
         while command not in letter:
             command = input('Choose an option:\n')
         if command == 'a':
-            customer_cart.add_item()
+            print('\nADD ITEM TO CART', end='\n')
+            item_name = str(input('Enter the item name:'))
+            item_description = str(input('\nEnter the item description:'))
+            item_price = float(input('\nEnter the item price:'))
+            item_quantity = int(input('\nEnter the item quantity:\n'))
+            cartitem = ItemToPurchase(item_name, item_price, item_quantity, item_description)
+            customer_cart.add_item(cartitem)
         if command == 'r':
             customer_cart.remove_item()
         if command == 'c':
