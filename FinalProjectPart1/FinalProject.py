@@ -13,6 +13,11 @@ def sortids(idslist):
     return idslist[0]
 
 
+def sortdates(dateslist):
+    split = dateslist.split('/')
+    return split[2], split[0]
+
+
 Mlist = []
 Plist = []
 Slist = []
@@ -99,3 +104,44 @@ for t in Tlist:
 
         new_list.sort(key=sortids)
         type_writer.writerows(new_list)
+
+# Loop to write PastServiceDateInventory
+
+with open('PastServiceDateInventory.csv', 'w', newline='') as ServiceDate:
+    dates_writer = csv.writer(ServiceDate)
+    current_date = datetime.date.today()
+    dateList = []
+    newDates = []
+    tempDate = []
+    nlist = []
+    for d in Slist:
+        Unmod_date = d[-1]
+        date = Unmod_date.split('/')
+        dateList.append(date)
+
+    for num in dateList:
+        if current_date > datetime.date(int(num[2]), int(num[0]), int(num[1])):
+            newDates.append(num)
+
+    for day in Slist:
+        Udate = day[-1]
+        date = Udate.split('/')
+        if date in newDates:
+            tempDate.append(Udate)
+            tempDate.sort(key=sortdates, reverse=True)
+
+    for time in tempDate:
+        for y in Slist:
+            if y[-1] == time:
+                ident = y[0]
+                for t in Mlist:
+                    if t[0] == ident:
+                        man = t[1]
+                        ty = t[2]
+                        for p in Plist:
+                            if p[0] == ident:
+                                co = p[-1]
+                        if t[-1] == "damaged":
+                            dates_writer.writerow([ident, man, ty, co, time, t[-1]])
+                        else:
+                            dates_writer.writerow([ident, man, ty, co, time])
