@@ -19,3 +19,8 @@ def selection_sort_descend_trace(numbers):
         for k in numbers:
             print(k, end=' ')
         print()
+
+
+if __name__ == "__main__":
+    numlist = [int(x) for x in input().split(' ')]
+    selection_sort_descend_trace(numlist)
